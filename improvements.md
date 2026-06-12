@@ -7,6 +7,7 @@
   - add Message queue ingestion (Kafka/RabbitMQ) for ingesting failures
 - write unit & integration tests for the backend
 - add rate limiting for the API
+- add a circuit breaker for the API
 - add a Notification service, to send notifications to the users with what failed and how to fix it
 - Async background workers for insights analysis
 - Prometheus metrics endpoint for insights of backend performance
