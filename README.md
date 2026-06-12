@@ -12,6 +12,7 @@ A lightweight platform that captures HTTP 500 failures from microservices, aggre
 - Python 3.12
 - Node.js 20
 - postgres
+- LLM API key (OpenAI or Anthropic) (optional) for AI insights
 
 ## Quick Start
 
