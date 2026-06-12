@@ -7,3 +7,4 @@
 - will be using selected LLM providers for AI insights
 - will be adding LLM based fixing tools later
 - To Faster build demo ignore authentication/authorization for now
+- All producer services are written in Python and FastAPI
