@@ -35,6 +35,7 @@ async def enrich_with_llm(group: IncidentGroup, findings: list[RuleFinding], sig
             response = await client.chat.completions.create(
                 model=model,
                 temprature=0.6,
+                max_tokens=1024,
                 messages=[{"role": "user", "content": prompt}],
                 response_format={"type": "json_object"},
             )
