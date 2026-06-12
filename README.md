@@ -125,8 +125,11 @@ FCI_INGEST_URL=http://localhost:8000/api/v1/failures uvicorn service-a.main:app 
 
 ## Future Extensions
 
-- Async background workers (Celery/ARQ)
-- Prometheus metrics endpoint
+- write unit & integration tests for the backend
+- add rate limiting for the API
+- add a Notification service, to send notifications to the users when a new incident is created
+- Async background workers
 - Message queue ingestion (Kafka/RabbitMQ)
+- Prometheus metrics endpoint for insights of backend performance
 - OpenTelemetry tracing
 - Auth on FCI API
