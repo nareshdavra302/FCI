@@ -34,6 +34,7 @@ async def enrich_with_llm(group: IncidentGroup, findings: list[RuleFinding], sig
             model = settings.llm_model or "gpt-4o-mini"
             response = await client.chat.completions.create(
                 model=model,
+                temprature=0.6,
                 messages=[{"role": "user", "content": prompt}],
                 response_format={"type": "json_object"},
             )
@@ -47,6 +48,7 @@ async def enrich_with_llm(group: IncidentGroup, findings: list[RuleFinding], sig
             response = await client.messages.create(
                 model=model,
                 max_tokens=1024,
+                temprature=0.6,
                 messages=[{"role": "user", "content": prompt + "\n\nRespond with valid JSON only."}],
             )
             text = response.content[0].text
