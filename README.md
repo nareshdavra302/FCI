@@ -6,6 +6,13 @@ A lightweight platform that captures HTTP 500 failures from microservices, aggre
 
 ![HLD Architecture](images/hld.svg)
 
+## Prerequisites to run the project
+
+- Docker Desktop
+- Python 3.12
+- Node.js 20
+- postgres
+
 ## Quick Start
 
 ```bash
