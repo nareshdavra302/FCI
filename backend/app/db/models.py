@@ -9,19 +9,19 @@ from sqlalchemy.orm import Mapped, mapped_column
 from app.db.base import Base
 
 
-# class ErrorCategory(str, enum.Enum):
-#     database = "database"
-#     timeout = "timeout"
-#     dependency = "dependency"
-#     authentication = "authentication"
-#     configuration = "configuration"
-#     unknown = "unknown"
+class ErrorCategory(str, enum.Enum):
+    database = "database"
+    timeout = "timeout"
+    dependency = "dependency"
+    authentication = "authentication"
+    configuration = "configuration"
+    unknown = "unknown"
 
 
-# class GeneratedBy(str, enum.Enum):
-#     rule_engine = "rule_engine"
-#     llm = "llm"
-#     hybrid = "hybrid"
+class GeneratedBy(str, enum.Enum):
+    rule_engine = "rule_engine"
+    llm = "llm"
+    hybrid = "hybrid"
 
 
 class FailureEvent(Base):

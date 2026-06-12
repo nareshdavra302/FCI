@@ -153,7 +153,7 @@ def get_correlation(
         services = sorted({f.service_name for f in group})
         if len(services) < 2:
             continue
-        categories = {f.error_category.value for f in group}
+        categories = {f.error_category for f in group}
         category = categories.pop() if len(categories) == 1 else "mixed"
         results.append(
             CorrelationEntry(
