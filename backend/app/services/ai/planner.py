@@ -19,7 +19,7 @@ class IncidentGroup:
 
     @property
     def categories(self) -> set[str]:
-        return {f.error_category.value for f in self.failures}
+        return {f.error_category for f in self.failures}
 
     @property
     def first_seen(self) -> datetime | None:
@@ -56,7 +56,7 @@ def cluster_failures(
     for failure in sorted_failures:
         key = (
             failure.service_name,
-            failure.error_category.value,
+            failure.error_category,
             _endpoint_prefix(failure.endpoint),
         )
         if (
