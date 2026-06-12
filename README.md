@@ -133,3 +133,5 @@ FCI_INGEST_URL=http://localhost:8000/api/v1/failures uvicorn service-a.main:app 
 - Prometheus metrics endpoint for insights of backend performance
 - OpenTelemetry tracing
 - Auth on FCI API
+- Refine search add elasticsearch for faster search
+- add a Caching layer for the LLM API for analysis results to reduce token usage
