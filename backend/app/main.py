@@ -7,7 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.api.routes.analytics import router as analytics_router
-from app.api.routes.failures import incidents_router, router as failures_router
+from app.api.routes.failures import router as failures_router
+from app.api.routes.incidents import router as incidents_router
 from app.api.routes.insights import router as insights_router
 from app.config import get_settings
 from app.db.session import check_db_connection
