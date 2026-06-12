@@ -100,7 +100,7 @@ def get_categories(
         .order_by(func.count(FailureEvent.id).desc())
         .all()
     )
-    return [CategoryCount(category=row[0].value, count=row[1]) for row in rows]
+    return [CategoryCount(category=row[0], count=row[1]) for row in rows]
 
 
 def get_heatmap(
