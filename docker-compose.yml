@@ -1,0 +1,92 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: fci
+      POSTGRES_PASSWORD: fci
+      POSTGRES_DB: fci
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fci"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  fci-api:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://fci:fci@postgres:5432/fci
+      CORS_ORIGINS: http://localhost:3000,http://localhost:5173
+      LLM_PROVIDER: mock
+      LOG_LEVEL: INFO
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  fci-frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - fci-api
+
+  service-a:
+    build:
+      context: ./mock-services
+      dockerfile: service-a/Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      FCI_INGEST_URL: http://fci-api:8000/api/v1/failures
+    depends_on:
+      - fci-api
+
+  service-b:
+    build:
+      context: ./mock-services
+      dockerfile: service-b/Dockerfile
+    ports:
+      - "8002:8002"
+    environment:
+      FCI_INGEST_URL: http://fci-api:8000/api/v1/failures
+    depends_on:
+      - fci-api
+
+  service-c:
+    build:
+      context: ./mock-services
+      dockerfile: service-c/Dockerfile
+    ports:
+      - "8003:8003"
+    environment:
+      FCI_INGEST_URL: http://fci-api:8000/api/v1/failures
+    depends_on:
+      - fci-api
+
+  simulator:
+    image: python:3.12-slim
+    working_dir: /app
+    volumes:
+      - ./scripts:/app/scripts
+    command: >
+      sh -c "pip install -q httpx && python scripts/simulate_failures.py"
+    environment:
+      SERVICE_A_URL: http://service-a:8001
+      SERVICE_B_URL: http://service-b:8002
+      SERVICE_C_URL: http://service-c:8003
+      SIMULATOR_INTERVAL: "10"
+    depends_on:
+      - service-a
+      - service-b
+      - service-c
+
+volumes:
+  pgdata:
