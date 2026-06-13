@@ -18,7 +18,19 @@ A lightweight platform that captures HTTP 500 failures from microservices, aggre
 
 ```bash
 cp .env.example .env
-docker compose up --build
+docker compose up -d --build
+```
+
+## Run tests
+
+```bash
+docker compose run fci-api pytest
+```
+
+## stop the project
+
+```bash
+docker compose down
 ```
 
 | Service   | URL                        |
